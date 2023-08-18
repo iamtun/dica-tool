@@ -2,7 +2,7 @@ const isPractice = (title) => {
     return title.startsWith('Vận dụng') || title.startsWith('HĐ') || title.startsWith('Thực hành') || title.startsWith('Bài')
 }
   
-const updateSubTitleById = async (id, subTitle) => {
+const updateSubTitleById = async (id, subTitle, client) => {
     // SQL query to update records
     const updateQuery = `
         UPDATE components_content_practices
@@ -29,7 +29,7 @@ async function getSubTitleFromSubContent(client) {
           const {id, title} = content;
           if(isPractice(title)) {
             console.log(`${id} - ${title} - ${title.split(':')[0]}`)
-            await updateSubTitleById(id, title.split(':')[0])
+            await updateSubTitleById(id, title.split(':')[0], client)
           }
         }
     } catch (error) {
